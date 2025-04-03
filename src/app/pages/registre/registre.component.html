@@ -1,0 +1,134 @@
+<!-- Main Wrapper -->
+<div class="main-wrapper login-body">
+  <div class="login-wrapper">
+    <div class="container">
+      <img class="img-fluid logo-dark mb-2 logo-color" src="assets/img/logo2.png" alt="Logo">
+
+      <div class="loginbox">
+        <div class="login-right">
+          <div class="login-right-wrap">
+            <h1>Register</h1>
+
+
+            <!-- Form -->
+            <form [formGroup]="form" (ngSubmit)="submit()">
+              <div class="input-block mb-3">
+                <label  htmlFor="labelName" class="form-control-label">Name</label>
+                <input id="labelName" class="form-control"  formControlName="name" type="text" />
+              </div>
+              <div class="input-block mb-3">
+                <label htmlFor="label" class="form-control-label">Email Address</label>
+                <input id="label"
+                       class="form-control"
+                       type="text"
+                       formControlName="email"
+                       id="email"
+                       ngClass="{
+                    'is-invalid': f['email'].touched && f['email'].invalid
+                  }"
+                />
+                @if (f['email'].touched && f['email'].invalid) {
+                  <div
+                    class="invalid-feedback"
+                  >
+                    @if (f['email'].errors && f['email'].errors['required']) {
+                      <div
+                      >
+                        Email is required.
+                      </div>
+                    }
+                  </div>
+                }
+                @if (CustomControler !== 0) {
+                  <div class="invalid-feedback">
+                    {{ CustomControler }}
+                  </div>
+                }
+              </div>
+              <div class="input-block mb-3">
+                <label htmlFor="label" class="form-control-label">Password</label>
+                <input id="label"
+                       class="form-control"
+                       type="password"
+                       formControlName="password"
+                       id="password"
+                       ngClass="{
+                    'is-invalid': f['password'].touched && f['password'].invalid
+                  }"
+                />
+                @if (f['password'].touched && f['password'].invalid) {
+                  <div
+                    class="invalid-feedback"
+                  >
+                    @if (
+                      f['password'].errors && f['password'].errors['required']
+                      ) {
+                      <div
+                      >
+                        Password is required.
+                      </div>
+                    }
+                  </div>
+                }
+              </div>
+              <div class="input-block mb-3">
+                <label htmlFor="label" class="form-control-label">Confirm Password</label>
+                <input id="label"
+                       class="form-control"
+                       type="password"
+                       formControlName="password_confirmation"
+                       id="password_confirmation"
+                       ngClass="{
+                    'is-invalid':
+                      f['password_confirmation'].touched &&
+                      f['password_confirmation'].invalid
+                  }"
+                />
+                @if (
+                  f['password_confirmation'].touched && f['password_confirmation'].invalid
+                  ) {
+                  <div
+                    class="invalid-feedback"
+                  >
+                    @if (
+                      f['password_confirmation'].errors &&
+                      f['password_confirmation'].errors['required']
+                      ) {
+                      <div
+                      >
+                        Confirm Password is required.
+                      </div>
+                    }
+                  </div>
+                }
+                @if (isValidConfirmPassword) {
+                  <div class="invalid-feedback">
+                    Password not matching
+                  </div>
+                }
+              </div>
+
+              <div class="input-block mb-3 mb-0">
+                <button
+
+                  class="btn btn-lg btn-block btn-primary w-100"
+                  type="submit"
+                >
+                  Register
+                </button>
+              </div>
+            </form>
+            <!-- /Form -->
+
+
+            <!-- /Social Login -->
+            <div class="text-center dont-have">
+              Already have an account? <a routerLink="/login">Login</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- /Main Wrapper -->
