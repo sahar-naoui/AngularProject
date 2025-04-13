@@ -10,7 +10,7 @@ import {Router} from "@angular/router";
 })
 export class LoginComponent implements OnInit {
   form: any = {
-    username: null,
+    email: null,
     password: null
   };
   isLoggedIn = false;
@@ -29,15 +29,15 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmit(): void {
-    const { username, password } = this.form;
-    this.authService.login(username, password).subscribe({
+    const { email, password } = this.form;
+    this.authService.login(email, password).subscribe({
       next: data => {
-
-        this.storageService.saveUser(data);
-        window.sessionStorage.setItem("token", JSON.stringify(data.jwtCookie));
-        window.sessionStorage.setItem("id", JSON.stringify(data.id));
-        window.sessionStorage.setItem("role", JSON.stringify(data.roles[0]));
-        window.sessionStorage.setItem("username", JSON.stringify(data.username));
+        console.log(data);
+        this.storageService.saveUser(data.Data);
+        window.sessionStorage.setItem("token", JSON.stringify(data.Data.accessToken.Token));
+        window.sessionStorage.setItem("id", JSON.stringify(data.Data.User.email));
+        window.sessionStorage.setItem("role", JSON.stringify(data.Data.UserRoles[0]));
+        window.sessionStorage.setItem("email", JSON.stringify(data.Data.User.email));
         this.isLoginFailed = false;
         this.isLoggedIn = true;
         this.roles = this.storageService.getUser().roles;

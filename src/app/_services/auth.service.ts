@@ -3,7 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import {StorageService} from "./storage.service";
 
-const AUTH_API = 'http://localhost:8080/auth/';
+const AUTH_API = 'http://127.0.0.1:8000/api/auth/';
 const token=window.sessionStorage.getItem("token")
 let httpOptions = {
   headers: new HttpHeaders({})
@@ -83,9 +83,9 @@ export class AuthService {
   }
   login(username: string, password: string): Observable<any> {
     return this.http.post(
-      AUTH_API + 'signin',
+      AUTH_API + 'login',
       {
-        username,
+        email: username,
         password,
       },
       httpOptions

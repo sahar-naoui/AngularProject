@@ -15,7 +15,7 @@ export class StorageService {
   public saveUser(user: any): void {
     window.sessionStorage.removeItem(USER_KEY);
     window.sessionStorage.setItem(USER_KEY, JSON.stringify(user));
-    window.sessionStorage.setItem("token", JSON.stringify(user.jwtCookie));
+    window.sessionStorage.setItem("token", JSON.stringify(user.accessToken.Token));
   }
 
   public getUser(): any {
