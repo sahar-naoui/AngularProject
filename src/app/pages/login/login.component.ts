@@ -1,54 +1,56 @@
-import { Component } from '@angular/core';
-import {FormControl, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
-import {SharedModule} from "../../shared/shared.module";
-import {Router, RouterLink} from "@angular/router";
-import {AuthService} from "../../core/services/auth/auth.service";
-import {routes} from "../../core/helpers/routes/routes";
-import {TokenService} from "../../core/services/TokenService";
+import { Component, OnInit } from '@angular/core';
+import {AuthService} from "../../_services/auth.service";
+import {StorageService} from "../../_services/storage.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-login',
-  standalone: true,
-  imports: [
-    ReactiveFormsModule,
-    SharedModule,
-    RouterLink
-  ],
   templateUrl: './login.component.html',
-  styleUrl: './login.component.scss'
+  styleUrls: ['./login.component.css']
 })
-export class LoginComponent {
-  public routes = routes;
-  public show_password = true;
-  form = new FormGroup({
-    email: new FormControl('', [Validators.required,Validators.email]),
-    password: new FormControl('', [Validators.required]),
-  });
+export class LoginComponent implements OnInit {
+  form: any = {
+    username: null,
+    password: null
+  };
+  isLoggedIn = false;
+  isLoginFailed = false;
+  errorMessage = '';
+  roles: string[] = [];
 
-  get f() {
-    return this.form.controls;
-  }
+  constructor(private authService: AuthService, private storageService: StorageService , private router:Router) { }
 
-  constructor(private router: Router, private auth: AuthService, private tokenService: TokenService) {
-
-  }
-
-
-
-  loginFormSubmit() {
-    if (this.form.valid) {
-      this.auth.login(this.form.value).subscribe((res)=>{
-        // @ts-ignore
-        if(res.Message =="Successful Login."){
-          // @ts-ignore
-          this.tokenService.setToken(res.Data.accessToken.Token)
-          // @ts-ignore
-          localStorage.setItem('user', JSON.stringify(res.Data.User));
-          this.router.navigate(['/dashboard']);
-          //this.router.navigate([routes.dashboard]);
-        }
-
-      })
+  ngOnInit(): void {
+    this.storageService.clean()
+    if (this.storageService.isLoggedIn()) {
+      this.isLoggedIn = true;
+      this.roles = this.storageService.getUser().roles;
     }
+  }
+
+  onSubmit(): void {
+    const { username, password } = this.form;
+    this.authService.login(username, password).subscribe({
+      next: data => {
+
+        this.storageService.saveUser(data);
+        window.sessionStorage.setItem("token", JSON.stringify(data.jwtCookie));
+        window.sessionStorage.setItem("id", JSON.stringify(data.id));
+        window.sessionStorage.setItem("role", JSON.stringify(data.roles[0]));
+        window.sessionStorage.setItem("username", JSON.stringify(data.username));
+        this.isLoginFailed = false;
+        this.isLoggedIn = true;
+        this.roles = this.storageService.getUser().roles;
+        this.router.navigate(['/dashboard'])
+      },
+      error: err => {
+        this.errorMessage = err.error.message;
+        this.isLoginFailed = true;
+      }
+    });
+  }
+
+  reloadPage(): void {
+    window.location.reload();
   }
 }
