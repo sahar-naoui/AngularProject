@@ -15,6 +15,8 @@ import {AjouterUtilisateurComponent} from "./pages/ajouter-utilisateur/ajouter-u
 import {AjouterCoursComponent} from "./pages/ajouter-cours/ajouter-cours.component";
 import {ListCoursComponent} from "./pages/list-cours/list-cours.component";
 import {PagesError404Component} from "./pages/pages-error404/pages-error404.component";
+import {CategorieComponent} from "./pages/categorie/categorie.component";
+import {CategorieAddComponent} from "./pages/categorie-add/categorie-add.component";
 const routes: Routes = [
   {
     path: '',
@@ -55,6 +57,8 @@ const routes: Routes = [
   { path: 'pages-register', component: PagesRegisterComponent },
   { path: 'pages-error404', component: PagesError404Component },
   { path: 'user-profile', component: UsersProfileComponent },
+  {path:'categorie',component:CategorieComponent},
+  {path:'categorie/add',component:CategorieAddComponent}
 ];
 
 @NgModule({

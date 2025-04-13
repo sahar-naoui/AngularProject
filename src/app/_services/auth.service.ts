@@ -94,7 +94,7 @@ export class AuthService {
 
   register(user:Object): Observable<any> {
     return this.http.post(
-      AUTH_API + 'signup', user,httpOptions
+      AUTH_API + 'register', user,httpOptions
     );
   }
 

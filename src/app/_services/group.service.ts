@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import {Observable} from "rxjs";
 import {HttpClient, HttpHeaders} from "@angular/common/http";
-const Groupe_API = 'http://localhost:8080/api/Group/';
+const Groupe_API = 'http://127.0.0.1:8000/api/api/Group/';
 
 const token=window.sessionStorage.getItem("token")
 let httpOptions = {

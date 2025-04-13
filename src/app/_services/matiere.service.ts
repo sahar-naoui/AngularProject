@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {Observable} from "rxjs";
 
-const Matiere_API = 'http://localhost:8080/api/Matiere/';
+const Matiere_API = 'http://127.0.0.1:8000/api/api/Matiere/';
 
 const token=window.sessionStorage.getItem("token")
 let httpOptions = {

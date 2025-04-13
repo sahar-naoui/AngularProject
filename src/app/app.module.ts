@@ -40,6 +40,8 @@ import {MatSlideToggleModule} from "@angular/material/slide-toggle";
 import { ListCoursComponent } from './pages/list-cours/list-cours.component';
 import { AjouterCoursComponent } from './pages/ajouter-cours/ajouter-cours.component';
 import {MatDatepickerModule} from "@angular/material/datepicker";
+import {CategorieComponent} from "./pages/categorie/categorie.component";
+import { CategorieAddComponent } from './pages/categorie-add/categorie-add.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -64,7 +66,9 @@ import {MatDatepickerModule} from "@angular/material/datepicker";
     ListAffectationEnseignantComponent,
     AjouterUtilisateurComponent,
     ListCoursComponent,
-    AjouterCoursComponent
+    AjouterCoursComponent,
+    CategorieComponent,
+    CategorieAddComponent
   ],
     imports: [
         BrowserModule,

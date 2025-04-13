@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {Observable, tap} from "rxjs";
 import { v4 as uuidv4 } from 'uuid';
-const Cour_API = 'http://localhost:8080/enseignant/cour/';
+const Cour_API = 'http://127.0.0.1:8000/api/enseignant/cour/';
 const boundary = uuidv4();
 
 let token=window.sessionStorage.getItem("token")

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {Observable} from "rxjs";
-const Affectaion_API = 'http://localhost:8080/api/GroupEnseignatMatiere/';
+const Affectaion_API = 'http://127.0.0.1:8000/api/api/GroupEnseignatMatiere/';
 
 const token=window.sessionStorage.getItem("token")
 let httpOptions = {

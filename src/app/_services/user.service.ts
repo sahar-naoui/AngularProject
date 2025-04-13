@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
-const API_URL = 'http://localhost:8080/test/';
+const API_URL = 'http://127.0.0.1:8000/api/test/';
 
 @Injectable({
   providedIn: 'root',

@@ -12,7 +12,10 @@
       <div *ngIf="role == 'admin' ">
        <li class="nav-item"> <a class="nav-link collapsed" routerLink="/groupe/list"> <i class="bi bi-people-fill"></i> <span>Groupes</span> </a></li>
       </div>
-      <div *ngIf="role == 'admin' || role == 'ROLE_ADMIN' ">
+      <div *ngIf="role == 'admin' ">
+        <li class="nav-item"> <a class="nav-link collapsed" routerLink="/categorie"> <i class="bi bi-layout-text-window-reverse"></i> <span>Categorie</span> </a></li>
+      </div>
+      <div *ngIf="role == 'admin'">
         <li class="nav-item"> <a class="nav-link collapsed" routerLink="/affectation/list"> <i class="bi bi-person-check-fill"></i> <span>Affectation Enseignant</span> </a></li>
       </div>
       <div *ngIf="role == 'admin' || role == 'ROLE_ADMIN'|| role == 'ROLE_ENSEIGNANT'|| role == 'ROLE_TIRAGE' ">
