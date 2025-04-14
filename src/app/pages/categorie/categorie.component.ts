@@ -7,6 +7,7 @@ import {MatSort} from "@angular/material/sort";
 import {GroupService} from "../../_services/group.service";
 import {Router} from "@angular/router";
 import {CategorieService} from "../../_services/categorie.service";
+import Swal from "sweetalert2";
 
 @Component({
   selector: 'app-categorie',
@@ -44,10 +45,45 @@ export class CategorieComponent implements OnInit {
 
   // @ts-ignore
   updateCategorie(id) {
-    alert(id)
+    this.router.navigate(['categorie/edit/', id]);
   }
   // @ts-ignore
   deleteCategorie(id) {
-
+    Swal.fire({
+      title: 'Êtes-vous sûr?',
+      text: 'Vous ne pourrez pas revenir en arrière !',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Supprimer',
+      cancelButtonText: 'Annuler'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        // @ts-ignore
+        this.categorieservice.deleteCategorie(id).subscribe(
+          data => {
+             if (data.message != "Failed")
+             {
+              Swal.fire(
+                '',
+                'Catégorie est supprimé avec succès.',
+                'success'
+              );
+              location.reload();
+            }
+            else
+            {
+              Swal.fire(
+                '',
+                'Groupe déjà affectée !!',
+                'error'
+              );
+            }
+            location.reload();
+          },
+          error => console.log(error));
+      }
+    });
   }
 }

@@ -21,15 +21,15 @@
 
             <form [formGroup]="form" (ngSubmit)="onSub()">
               <div class="row">
-                <mat-label class="col-md-2 label_form" style="margin-top: 20px;font-size: revert;">Nom Groupe :</mat-label>
+                <mat-label class="col-md-2 label_form" style="margin-top: 20px;font-size: revert;">Category Name:</mat-label>
                 <mat-form-field appearance="outline" class="col-md-5">
-                  <input matInput formControlName="name" placeholder="Nom groupe" required>
+                  <input matInput formControlName="CategoryName" placeholder="Category Name" required>
                 </mat-form-field>
               </div>
               <div class="row">
-                <mat-label class="col-md-2 label_form" style="margin-top: 20px;font-size: revert;">Nombre d'etudiant :</mat-label>
+                <mat-label class="col-md-2 label_form" style="margin-top: 20px;font-size: revert;">Description :</mat-label>
                 <mat-form-field appearance="outline" class="col-md-5">
-                  <input matInput formControlName="nbEtudiant" placeholder="Nombre d'etudant" required>
+                  <input matInput formControlName="Description" placeholder="Description" required>
                 </mat-form-field>
               </div>
               <div class="row">

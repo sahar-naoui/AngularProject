@@ -81,7 +81,6 @@ export class AjouterGroupComponent implements OnInit {
       }
     }
 
-
   }
 
   Retour() {

@@ -3,6 +3,8 @@ import {ActivatedRoute, Router} from "@angular/router";
 import {CategorieService} from "../../_services/categorie.service";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {Categorie} from "../../models/Categorie";
+import {Group} from "../../models/Group";
+import Swal from "sweetalert2";
 
 @Component({
   selector: 'app-categorie-add',
@@ -24,11 +26,11 @@ export class CategorieAddComponent implements OnInit {
       this.title = 'Modifier Categorie';
       this.buttonadd = 'Modifier ';
       // @ts-ignore
-      this.categorieService.getListCategorie(this.CurrentItemId)
+      this.categorieService.getCategorie(this.CurrentItemId)
         .subscribe(data => {
           // @ts-ignore
           this.compte = data;
-          this.initForm1(data);
+          this.initForm1(data.Data);
         }, error => console.log(error));
     }else{
       this.buttonadd = 'Enregistrer ';
@@ -50,10 +52,51 @@ export class CategorieAddComponent implements OnInit {
     });
   }
   Retour() {
-    this.router.navigate(['/categories']);
+    this.router.navigate(['/categorie']);
   }
 
   onSub() {
-
+    // @ts-ignore
+    this.CurrentItemId = this.activatedRoute.snapshot.params.id;
+    if (!!this.CurrentItemId) {
+      // @ts-ignore
+      Swal.fire({
+        title: 'Voulez-vous enregistrer les modifications?',
+        showCancelButton: true,
+        confirmButtonText: 'Enregistrer',
+        cancelButtonText: 'Annuler',
+      }).then((result) => {
+        /* Read more about isConfirmed, isDenied below */
+        if (result.isConfirmed) {
+          this.updateCategorie( this.CurrentItemId);
+        } else if (result.isDenied) {
+          Swal.fire('Changes are not saved', '', 'info');
+        }
+      });
+    }
+    else{
+      if(this.form.value.CategoryName != null && this.form.value.Description != null) {
+        this.categorieService.register(this.form.value).subscribe(data => {
+            this.categorie = new Categorie();
+            Swal.fire(
+              '',
+              'Action effectuée avec success!',
+              'success'
+            );
+            this.router.navigate(['/categorie']);
+          },
+          error => console.log(error));
+      }
+    }
+  }
+  private updateCategorie(id: any) {
+    // console.log(this.form.value);
+    // @ts-ignore
+    let obj = {id: id, CategoryName: this.form.value.CategoryName,Description:this.form.value.Description}
+    this.categorieService.updateCategorie(obj,id)
+      .subscribe(data => {
+        this.categorie = new Categorie();
+        this.router.navigate(['/categorie']);
+      }, error => console.log(error));
   }
 }

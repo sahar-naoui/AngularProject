@@ -58,7 +58,8 @@ const routes: Routes = [
   { path: 'pages-error404', component: PagesError404Component },
   { path: 'user-profile', component: UsersProfileComponent },
   {path:'categorie',component:CategorieComponent},
-  {path:'categorie/add',component:CategorieAddComponent}
+  {path:'categorie/add',component:CategorieAddComponent},
+  {path:'categorie/edit/:id',component:CategorieAddComponent}
 ];
 
 @NgModule({
